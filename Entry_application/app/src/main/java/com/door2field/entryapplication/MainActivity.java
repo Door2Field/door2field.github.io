@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int m_Count;
+    private int m_Count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +34,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void enterSubWorld(View v) {
-        Log.e("tag","    enterSubWorld c4lled!");
+        Log.e("tag", "    enterSubWorld c4lled!");
         startActivity(new Intent(MainActivity.this, SubActivity.class));
     }
 
     public void countUp(View v) {
         Log.e("tag","    countUp c4lled!");
-        m_Count++;
+        if (m_Count < Integer.MAX_VALUE)
+            m_Count++;
+        else {
+            Log.e("tag","NOTREACHED");
+            Log.e("tag","m_Count is too large.");
+        }
+        TextView countView = (TextView) findViewById(R.id.myTextView2CountUp);
+        countView.setText(String.valueOf(m_Count));
+    }
+
+    public void countDown(View v) {
+        Log.e("tag", "    countDown c4lled!");
+        if (m_Count > 0)
+            m_Count--;
+        TextView countView = (TextView) findViewById(R.id.myTextView2CountUp);
+        countView.setText(String.valueOf(m_Count));
+    }
+
+    public void resetCounter(View v) {
+        Log.e("tag", "    resetCounter c4lled!");
+        m_Count = 0;
         TextView countView = (TextView) findViewById(R.id.myTextView2CountUp);
         countView.setText(String.valueOf(m_Count));
     }

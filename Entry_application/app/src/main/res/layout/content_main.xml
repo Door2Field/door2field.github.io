@@ -10,16 +10,17 @@
     tools:showIn="@layout/activity_main" tools:context=".MainActivity">
 
     <TextView android:text="Hello World!" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="sub world"
         android:id="@+id/myButton2EnterSubWorld"
+        android:onClick="enterSubWorld"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="enterSubWorld" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -41,4 +42,26 @@
         android:layout_above="@+id/myButton2CountUp"
         android:layout_centerHorizontal="true"
         android:textSize="90sp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CountDown"
+        android:id="@+id/myButton2CountDown"
+        android:layout_alignTop="@+id/myButton2CountUp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="countDown" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ResetCounter"
+        android:id="@+id/myButton2ResetCounter"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="71dp"
+        android:onClick="resetCounter" />
 </RelativeLayout>
