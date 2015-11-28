@@ -10,9 +10,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private int m_Count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
     public void enterSubWorld(View v) {
         Log.e("tag","    enterSubWorld c4lled!");
         startActivity(new Intent(MainActivity.this, SubActivity.class));
+    }
+
+    public void countUp(View v) {
+        Log.e("tag","    countUp c4lled!");
+        m_Count++;
+        TextView countView = (TextView) findViewById(R.id.myTextView2CountUp);
+        countView.setText(String.valueOf(m_Count));
     }
 
     @Override
