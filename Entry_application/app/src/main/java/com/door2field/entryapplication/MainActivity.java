@@ -22,6 +22,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -154,9 +156,15 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private String format(BigDecimal value) {
+        DecimalFormat df = new DecimalFormat(",000.00000");
+        return df.format(value);
+    }
+
     private void displaysSensorValues(float[] values) {
         if (values.length >= 1) {
-            mTvSensorValue.setText(String.valueOf(values[0]));
+            BigDecimal bd = new BigDecimal(Float.toString(values[0]));
+            mTvSensorValue.setText(format(bd));
         }
     }
 

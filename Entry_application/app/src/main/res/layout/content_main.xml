@@ -100,7 +100,10 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="0"
         android:id="@+id/MyTextView4SensorValue"
-        android:layout_centerVertical="true"
+        android:textSize="45sp"
+        android:layout_gravity="center"
+        android:layout_below="@+id/myButton2EnterBGWorld"
         android:layout_alignRight="@+id/myButton2CountDown"
-        android:layout_alignEnd="@+id/myButton2CountDown" />
+        android:layout_alignEnd="@+id/myButton2CountDown"
+        android:maxLength="10" />
 </RelativeLayout>
