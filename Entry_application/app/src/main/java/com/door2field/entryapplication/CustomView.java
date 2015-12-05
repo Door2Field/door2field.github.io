@@ -26,14 +26,14 @@ public class CustomView extends LinearLayout{
         framePaint.setARGB(200,55,55,135);
         framePaint.setAntiAlias(true);
         framePaint.setStyle(Paint.Style.STROKE);
-        framePaint.setStrokeWidth(2);
+        framePaint.setStrokeWidth(0);
 
     }
 
     @Override
     protected void dispatchDraw(Canvas canvas){
         RectF drawRect = new RectF();
-        setPadding(256,256,8,8);
+        setPadding(8,8,8,8);
         drawRect.set(0, 0, getMeasuredWidth(), getMeasuredHeight());
         canvas.drawRoundRect(drawRect,15,15,basePaint);
         canvas.drawRoundRect(drawRect,15,15,framePaint);
