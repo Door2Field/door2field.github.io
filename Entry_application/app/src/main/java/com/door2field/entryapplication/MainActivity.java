@@ -1,8 +1,13 @@
 package com.door2field.entryapplication;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -16,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
             binder = null;
         }
     };
+
+    private TextView mTvSensorValue = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mTvSensorValue = (TextView)findViewById(R.id.MyTextView4SensorValue);
     }
 
     public void enterSubWorld(View v) {
@@ -130,5 +141,51 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private SensorEventListener listener = new SensorEventListener() {
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            displaysSensorValues(event.values);
+        }
+    };
+
+    private void displaysSensorValues(float[] values) {
+        if (values.length >= 1) {
+            mTvSensorValue.setText(String.valueOf(values[0]));
+        }
+    }
+
+    @Override
+    public void onResume() {
+            super.onResume();
+            initSensor();
+    }
+
+    private void initSensor() {
+        SensorManager sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+
+        int sensorType = Sensor.TYPE_ORIENTATION;
+        int sensorDelay = SensorManager.SENSOR_DELAY_FASTEST;
+
+        List<Sensor> list = sensorManager.getSensorList(sensorType);
+
+        for (Sensor sensor : list) {
+            if (sensor.getType() == sensorType) {
+                sensorManager.registerListener(listener, sensor, sensorDelay);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        ((SensorManager)getSystemService(Context.SENSOR_SERVICE)).unregisterListener(listener);
     }
 }

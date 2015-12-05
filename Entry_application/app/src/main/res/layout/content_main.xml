@@ -93,4 +93,14 @@
         android:layout_above="@+id/myButton2ResetCounter"
         android:layout_toRightOf="@+id/myTextView4Counter"
         android:layout_toEndOf="@+id/myTextView4Counter" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0"
+        android:id="@+id/MyTextView4SensorValue"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/myButton2CountDown"
+        android:layout_alignEnd="@+id/myButton2CountDown" />
 </RelativeLayout>
