@@ -9,8 +9,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_sub" tools:context=".SubActivity">
 
-    <TextView android:text="Hello Sub World!" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
@@ -18,7 +17,21 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/dialog_image_aaa_0000" />
-    
+
+
+<com.door2field.entryapplication.CustomView
+    android:layout_width="match_parent"
+    android:layout_height="180sp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"
+        />
+</com.door2field.entryapplication.CustomView>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
