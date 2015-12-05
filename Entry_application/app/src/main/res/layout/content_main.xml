@@ -19,19 +19,19 @@
         android:text="sub world"
         android:id="@+id/myButton2EnterSubWorld"
         android:onClick="enterSubWorld"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignTop="@+id/myButton2EnterBGWorld"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Count Up"
         android:id="@+id/myButton2CountUp"
-        android:layout_above="@+id/myButton2EnterSubWorld"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
         android:onClick="countUp"
-        android:nestedScrollingEnabled="true" />
+        android:nestedScrollingEnabled="true"
+        android:layout_below="@+id/myTextView4Counter"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,9 +39,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
         android:id="@+id/myTextView4Counter"
-        android:layout_above="@+id/myButton2CountUp"
-        android:layout_centerHorizontal="true"
-        android:textSize="90sp" />
+        android:textSize="90sp"
+        android:layout_alignTop="@+id/textView"
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -49,10 +49,10 @@
         android:layout_height="wrap_content"
         android:text="CountDown"
         android:id="@+id/myButton2CountDown"
+        android:onClick="countDown"
         android:layout_alignTop="@+id/myButton2CountUp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="countDown" />
+        android:layout_toRightOf="@+id/myButton2CountUp"
+        android:layout_toEndOf="@+id/myButton2CountUp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -60,50 +60,37 @@
         android:layout_height="wrap_content"
         android:text="ResetCounter"
         android:id="@+id/myButton2ResetCounter"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="71dp"
-        android:onClick="resetCounter" />
+        android:onClick="resetCounter"
+        android:layout_below="@+id/myTextView4Counter"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BG world"
         android:id="@+id/myButton2EnterBGWorld"
-        android:layout_alignTop="@+id/myButton2EnterSubWorld"
-        android:layout_alignLeft="@+id/myButton2CountDown"
-        android:layout_alignStart="@+id/myButton2CountDown"
-        android:onClick="enterBGWorld" />
+        android:onClick="enterBGWorld"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="StartService"
         android:id="@+id/myButton2StartService"
-        android:layout_alignBaseline="@+id/myButton2StopService"
-        android:layout_alignBottom="@+id/myButton2StopService"
-        android:layout_toLeftOf="@+id/myTextView4Counter"
-        android:layout_toStartOf="@+id/myTextView4Counter" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="65dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="StopService"
         android:id="@+id/myButton2StopService"
-        android:layout_above="@+id/myButton2ResetCounter"
-        android:layout_toRightOf="@+id/myTextView4Counter"
-        android:layout_toEndOf="@+id/myTextView4Counter" />
+        android:layout_alignTop="@+id/myButton2StartService"
+        android:layout_alignLeft="@+id/myTextView4Counter"
+        android:layout_alignStart="@+id/myTextView4Counter" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="0"
-        android:id="@+id/MyTextView4SensorValue"
-        android:textSize="45sp"
-        android:layout_gravity="center"
-        android:layout_below="@+id/myButton2EnterBGWorld"
-        android:layout_alignRight="@+id/myButton2CountDown"
-        android:layout_alignEnd="@+id/myButton2CountDown"
-        android:maxLength="10" />
 </RelativeLayout>
