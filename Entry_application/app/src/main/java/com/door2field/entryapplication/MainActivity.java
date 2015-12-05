@@ -1,7 +1,11 @@
 package com.door2field.entryapplication;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,11 +14,25 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private int m_Count = 0;
+
+    private ImyService binder;
+
+    private ServiceConnection connection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.e("tagMainW", "onServiceConnected c4lled!");
+            binder = ImyService.Stub.asInterface(service);
+        }
+        public void onServiceDisconnected(ComponentName name) {
+            Log.e("tagMainW", "onServiceDisconnected c4lled!");
+            binder = null;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,37 +49,64 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Button start_btn = (Button)findViewById(R.id.myButton2StartService);
+        start_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, UpdateService.class);
+                startService(intent);
+                bindService(intent, connection, BIND_AUTO_CREATE);
+            }
+        });
+
+        Button stop_btn = (Button)findViewById(R.id.myButton2StopService);
+        stop_btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    if (binder != null) {
+                        binder.stopService();
+                    }
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void enterSubWorld(View v) {
-        Log.e("tag", "    enterSubWorld c4lled!");
+        Log.e("tagMainW", "enterSubWorld c4lled!");
         startActivity(new Intent(MainActivity.this, SubActivity.class));
     }
 
+    public void enterBGWorld(View v) {
+        Log.e("tagMainW", "enterBGWorld c4lled!");
+        startActivity(new Intent(MainActivity.this, BackGroundActivity.class));
+    }
+
     public void countUp(View v) {
-        Log.e("tag","    countUp c4lled!");
+        Log.e("tagMainW", "countUp c4lled!");
         if (m_Count < Integer.MAX_VALUE)
             m_Count++;
         else {
-            Log.e("tag","NOTREACHED");
-            Log.e("tag","m_Count is too large.");
+            Log.e("tagMainW", "NOTREACHED");
+            Log.e("tagMainW", "m_Count is too large.");
         }
-        TextView countView = (TextView) findViewById(R.id.myTextView2CountUp);
+        TextView countView = (TextView) findViewById(R.id.myTextView4Counter);
         countView.setText(String.valueOf(m_Count));
     }
 
     public void countDown(View v) {
-        Log.e("tag", "    countDown c4lled!");
+        Log.e("tagMainW", "countDown c4lled!");
         if (m_Count > 0)
             m_Count--;
-        TextView countView = (TextView) findViewById(R.id.myTextView2CountUp);
+        TextView countView = (TextView) findViewById(R.id.myTextView4Counter);
         countView.setText(String.valueOf(m_Count));
     }
 
     public void resetCounter(View v) {
-        Log.e("tag", "    resetCounter c4lled!");
+        Log.e("tagMainW", "resetCounter c4lled!");
         m_Count = 0;
-        TextView countView = (TextView) findViewById(R.id.myTextView2CountUp);
+        TextView countView = (TextView) findViewById(R.id.myTextView4Counter);
         countView.setText(String.valueOf(m_Count));
     }
 

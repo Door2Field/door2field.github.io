@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
-        android:id="@+id/myTextView2CountUp"
+        android:id="@+id/myTextView4Counter"
         android:layout_above="@+id/myButton2CountUp"
         android:layout_centerHorizontal="true"
         android:textSize="90sp" />
@@ -64,4 +64,33 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="71dp"
         android:onClick="resetCounter" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BG world"
+        android:id="@+id/myButton2EnterBGWorld"
+        android:layout_alignTop="@+id/myButton2EnterSubWorld"
+        android:layout_alignLeft="@+id/myButton2CountDown"
+        android:layout_alignStart="@+id/myButton2CountDown"
+        android:onClick="enterBGWorld" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="StartService"
+        android:id="@+id/myButton2StartService"
+        android:layout_alignBaseline="@+id/myButton2StopService"
+        android:layout_alignBottom="@+id/myButton2StopService"
+        android:layout_toLeftOf="@+id/myTextView4Counter"
+        android:layout_toStartOf="@+id/myTextView4Counter" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="StopService"
+        android:id="@+id/myButton2StopService"
+        android:layout_above="@+id/myButton2ResetCounter"
+        android:layout_toRightOf="@+id/myTextView4Counter"
+        android:layout_toEndOf="@+id/myTextView4Counter" />
 </RelativeLayout>
