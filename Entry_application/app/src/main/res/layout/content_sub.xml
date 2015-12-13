@@ -18,7 +18,6 @@
         android:onClick="enterMainWorld" />
 
         <ImageView
-            android:id="@+id/imageIconHeart"
             android:layout_width="26sp"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_heart1" />
@@ -73,5 +72,3 @@
              />
 
 
-</RelativeLayout>
-</LinearLayout>
