@@ -20,18 +20,24 @@ import java.util.List;
 
 public class BackGroundActivity extends AppCompatActivity {
 
-    private TextView mTvSensorValueAzimuth = null;
-    private TextView mTvSensorValuePitch   = null;
-    private TextView mTvSensorValueRoll    = null;
+    private TextView mTvSensValAzimuth    = null;
+    private TextView mTvSensValPitch      = null;
+    private TextView mTvSensValRoll       = null;
+    private TextView mTvSensValAzimuthDbg = null;
+    private TextView mTvSensValPitchDbg   = null;
+    private TextView mTvSensValRollDbg    = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bg);
 
-        mTvSensorValueAzimuth = (TextView)findViewById(R.id.MyTextView4SensorValueAzimuth);
-        mTvSensorValuePitch   = (TextView)findViewById(R.id.MyTextView4SensorValuePitch);
-        mTvSensorValueRoll    = (TextView)findViewById(R.id.MyTextView4SensorValueRoll);
+        mTvSensValAzimuth    = (TextView)findViewById(R.id.MyTextView4SensValAzimuth);
+        mTvSensValPitch      = (TextView)findViewById(R.id.MyTextView4SensValPitch);
+        mTvSensValRoll       = (TextView)findViewById(R.id.MyTextView4SensValRoll);
+        mTvSensValAzimuthDbg = (TextView)findViewById(R.id.MyTextView4SensValAzimuthDbg);
+        mTvSensValPitchDbg   = (TextView)findViewById(R.id.MyTextView4SensValPitchDbg);
+        mTvSensValRollDbg    = (TextView)findViewById(R.id.MyTextView4SensValRollDbg);
     }
 
     @Override
@@ -68,39 +74,95 @@ public class BackGroundActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private String format(BigDecimal value) {
-        DecimalFormat df = new DecimalFormat(",0000.000000");
-        return df.format(value);
-    }
-
-    private void displaysSensorValues(float[] values) {
-        if (values.length >= 1) {
-            BigDecimal bd0 = new BigDecimal(Float.toString(values[0]));
-            BigDecimal bd1 = new BigDecimal(Float.toString(values[1]));
-            BigDecimal bd2 = new BigDecimal(Float.toString(values[2]));
-            mTvSensorValueAzimuth.setText(format(bd0));
-            mTvSensorValuePitch.setText(format(bd1));
-            mTvSensorValueRoll.setText(format(bd2));
-        }
-    }
-
     private SensorEventListener listener = new SensorEventListener() {
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
 
+        final int MATRIX_SIZE = 16;
+        float[] inM  = new float[MATRIX_SIZE];
+        float[] outM = new float[MATRIX_SIZE];
+        float[] tmpM = new float[MATRIX_SIZE];
+
+        final int AXIS_NUM = 3;
+        float[] SensValA    = new float[AXIS_NUM];
+        float[] SensValMF   = new float[AXIS_NUM];
+        float[] SensValO    = new float[AXIS_NUM];
+        float[] SensValOdbg = new float[AXIS_NUM];
+
         @Override
         public void onSensorChanged(SensorEvent event) {
-            displaysSensorValues(event.values);
+            switch(event.sensor.getType()) {
+                case Sensor.TYPE_ACCELEROMETER:
+                    SensValA = event.values.clone();
+                    break;
+
+                case Sensor.TYPE_MAGNETIC_FIELD:
+                    SensValMF = event.values.clone();
+                    break;
+
+                case Sensor.TYPE_ORIENTATION:
+                    SensValOdbg = event.values.clone();
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (SensValA != null && SensValMF != null) {
+                SensorManager.getRotationMatrix(inM, tmpM, SensValA, SensValMF);
+
+                /*
+                 * @todo
+                 * temporary handling
+                 */
+                SensorManager.remapCoordinateSystem(inM, SensorManager.AXIS_X, SensorManager.AXIS_Y, outM);
+
+                SensorManager.getOrientation(outM, SensValO);
+                displaysSensValO(SensValO);
+            }
+
+            if (SensValOdbg != null) {
+                displaysSensValOdbg(SensValOdbg);
+            }
         }
     };
 
+    private void displaysSensValO(float[] values) {
+        if (values.length >= 1) {
+            BigDecimal bd0 = new BigDecimal(Float.toString((float)(values[0] * 180 / Math.PI)));
+            BigDecimal bd1 = new BigDecimal(Float.toString((float)(values[1] * 180 / Math.PI)));
+            BigDecimal bd2 = new BigDecimal(Float.toString((float)(values[2] * 180 / Math.PI)));
+            mTvSensValAzimuth.setText(format(bd0));
+            mTvSensValPitch.setText(format(bd1));
+            mTvSensValRoll.setText(format(bd2));
+        }
+    }
+
+    private void displaysSensValOdbg(float[] values) {
+        if (values.length >= 1) {
+            BigDecimal bd0 = new BigDecimal(Float.toString(values[0]));
+            BigDecimal bd1 = new BigDecimal(Float.toString(values[1]));
+            BigDecimal bd2 = new BigDecimal(Float.toString(values[2]));
+            mTvSensValAzimuthDbg.setText(format(bd0));
+            mTvSensValPitchDbg.setText(format(bd1));
+            mTvSensValRollDbg.setText(format(bd2));
+        }
+    }
+
+    private String format(BigDecimal value) {
+        DecimalFormat df = new DecimalFormat(",0000.000000");
+        return df.format(value);
+    }
+
     private void initSensor() {
         SensorManager sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        registListener(sensorManager, Sensor.TYPE_ORIENTATION, SensorManager.SENSOR_DELAY_FASTEST);
+        registListener(sensorManager, Sensor.TYPE_MAGNETIC_FIELD, SensorManager.SENSOR_DELAY_FASTEST);
+        registListener(sensorManager, Sensor.TYPE_ACCELEROMETER, SensorManager.SENSOR_DELAY_FASTEST);
+    }
 
-        int sensorType  = Sensor.TYPE_ORIENTATION;
-        int sensorDelay = SensorManager.SENSOR_DELAY_FASTEST;
-
+    private void registListener(SensorManager sensorManager, int sensorType, int sensorDelay) {
         List<Sensor> list = sensorManager.getSensorList(sensorType);
 
         for (Sensor sensor : list) {

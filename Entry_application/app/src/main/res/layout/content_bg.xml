@@ -32,11 +32,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="0"
-        android:id="@+id/MyTextView4SensorValueAzimuth"
+        android:id="@+id/MyTextView4SensValAzimuth"
         android:textSize="15sp"
         android:layout_below="@+id/MyTextView4HelloBGW"
-        android:layout_alignLeft="@+id/MyTextView4SensorValuePitch"
-        android:layout_alignStart="@+id/MyTextView4SensorValuePitch"
+        android:layout_alignLeft="@+id/MyTextView4SensValPitch"
+        android:layout_alignStart="@+id/MyTextView4SensValPitch"
         android:layout_marginTop="23dp" />
 
     <TextView
@@ -45,11 +45,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="0"
-        android:id="@+id/MyTextView4SensorValuePitch"
+        android:id="@+id/MyTextView4SensValPitch"
         android:textSize="15sp"
-        android:layout_below="@+id/MyTextView4SensorValueAzimuth"
-        android:layout_alignLeft="@+id/MyTextView4SensorValueRoll"
-        android:layout_alignStart="@+id/MyTextView4SensorValueRoll" />
+        android:layout_below="@+id/MyTextView4SensValAzimuth"
+        android:layout_alignLeft="@+id/MyTextView4SensValRoll"
+        android:layout_alignStart="@+id/MyTextView4SensValRoll" />
 
     <TextView
         android:textColor="#00ff00"
@@ -57,8 +57,42 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="0"
-        android:id="@+id/MyTextView4SensorValueRoll"
+        android:id="@+id/MyTextView4SensValRoll"
         android:textSize="15sp"
-        android:layout_below="@+id/MyTextView4SensorValuePitch"
+        android:layout_below="@+id/MyTextView4SensValPitch"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="0"
+        android:id="@+id/MyTextView4SensValAzimuthDbg"
+        android:layout_below="@+id/MyTextView4SensValRoll"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:textColor="#00ff00"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="0"
+        android:id="@+id/MyTextView4SensValPitchDbg"
+        android:layout_below="@+id/MyTextView4SensValAzimuthDbg"
+        android:layout_centerHorizontal="true"
+        android:textColor="#00ff00"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="0"
+        android:id="@+id/MyTextView4SensValRollDbg"
+        android:layout_below="@+id/MyTextView4SensValPitchDbg"
+        android:layout_centerHorizontal="true"
+        android:textColor="#00ff00"
+        android:textSize="15sp" />
 </RelativeLayout>
