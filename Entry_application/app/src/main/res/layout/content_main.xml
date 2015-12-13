@@ -89,8 +89,7 @@
         android:layout_height="wrap_content"
         android:text="StopService"
         android:id="@+id/myButton2StopService"
-        android:layout_alignTop="@+id/myButton2StartService"
-        android:layout_alignLeft="@+id/myTextView4Counter"
-        android:layout_alignStart="@+id/myTextView4Counter" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/myButton2StartService" />
 
 </RelativeLayout>
