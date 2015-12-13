@@ -28,6 +28,14 @@
             android:layout_height="26sp"
             android:text="100"/>
 
+        <!--
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Message"
+            android:id="@+id/myButton2UpdateMsg"
+            android:onClick="updateMsg" />
+        -->
     </LinearLayout>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -58,6 +66,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/MyTextView4Message"
         android:text="Message"
         />
 </com.door2field.entryapplication.CustomView>
@@ -72,6 +81,20 @@
             android:onClick="enterMainWorld"
              />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Message"
+            android:id="@+id/myButton2UpdateMsg"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="updateMsg" />
 
-</RelativeLayout>
-</LinearLayout>
+        <!--
+                    android:layout_alignParentRight="true"
+                   android:layout_alignBottom="true"
+        -->
+
+
+        </RelativeLayout>
+        </LinearLayout>
